@@ -1,0 +1,100 @@
+## Where the vocab(s) will be written
+src_vocab: data/vocab.src
+tgt_vocab: data/vocab.tgt
+
+### Transform related opts:
+
+# Tokenisation options
+# no submodel used with transformer architecture, by default
+
+src_subword_type: 
+src_subword_model: 
+tgt_subword_type: 
+tgt_subword_model: 
+# Number of candidates for SentencePiece sampling
+subword_nbest: 20
+# Smoothing parameter for SentencePiece sampling
+subword_alpha: 0.1
+# Specific arguments for pyonmttok
+src_onmttok_kwargs: "{'mode': 'none', 'spacer_annotate': True}"
+tgt_onmttok_kwargs: "{'mode': 'none', 'spacer_annotate': True}"
+
+#### Filter
+src_seq_length: 150
+tgt_seq_length: 150
+
+# Corpus opts:
+data:
+  corpus_1:
+    path_src: data/src-train.txt
+    path_tgt: data/tgt-train.txt
+    transforms: [onmt_tokenize, filtertoolong]
+    weight: 1
+  valid:
+    path_src: data/src-val.txt
+    path_tgt: data/tgt-val.txt
+    transforms: [onmt_tokenize]
+
+# silently ignore empty lines in the data
+skip_empty_level: silent
+
+# Transformer Model Hyperparameters
+save_data: data/
+save_model: models/model
+save_checkpoint_steps: 40000
+valid_steps: 2000
+train_steps: 200000
+seed: 5151
+report_every: 2000
+keep_checkpoint: 5
+
+# To resume training from previous checkpoint, specify name e.g. model_step_10000.pt
+# train_from: model_step_10000.pt
+
+# Batching
+queue_size: 10000
+bucket_size: 32768
+batch_type: tokens
+batch_size: 4096
+valid_batch_size: 8
+max_generator_batches: 2
+accum_count: [4]
+accum_steps: [0]
+
+# Optimization
+model_dtype: fp32
+optim: adam
+learning_rate: 2
+warmup_steps: 8000
+decay_method: noam
+adam_beta2: 0.998
+max_grad_norm: 0
+label_smoothing: 0.1
+param_init: 0
+param_init_glorot: true
+normalization: tokens
+
+# Model
+encoder_type: transformer
+decoder_type: transformer
+position_encoding: true
+enc_layers: 6
+dec_layers: 6
+heads: 8
+rnn_size: 512
+word_vec_size: 512
+transformer_ff: 2048
+dropout: [0.1]
+#dropout_steps: [0]
+# attention_dropout: [0.1]
+
+# Logging
+
+# tensorboar logging
+tensorboard: true
+# training log file
+log_file: data/training_log.txt
+
+# Train on a single GPU
+world_size: 1
+gpu_ranks: 0
