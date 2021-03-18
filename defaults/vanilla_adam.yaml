@@ -1,20 +1,10 @@
 # no subword model set by default
 # default optimizer settings are used
-# use on the fly tokenization with sentencepiece
+# use on the fly omnt_tokenize
 
 ## Where the vocab(s) will be written
 src_vocab: data/vocab.src
 tgt_vocab: data/vocab.tgt
-
-# Tokenisation options
-src_subword_type:
-src_subword_model:
-tgt_subword_type:
-tgt_subword_model:
-# Number of candidates for SentencePiece sampling
-subword_nbest: 20
-# Smoothing parameter for SentencePiece sampling
-subword_alpha: 0.1
 
 # Specific arguments for pyonmttok
 src_onmttok_kwargs: "{'mode': 'none', 'spacer_annotate': True}"
