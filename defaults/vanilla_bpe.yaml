@@ -7,10 +7,10 @@ src_vocab: data/vocab.src
 tgt_vocab: data/vocab.tgt
 
 # Tokenisation options
-src_subword_type:
-src_subword_model:
-tgt_subword_type:
-tgt_subword_model:
+src_subword_type: sentencepiece
+src_subword_model: data/spm.model
+tgt_subword_type: sentencepiece
+tgt_subword_model: data/spm.model
 # Number of candidates for SentencePiece sampling
 subword_nbest: 20
 # Smoothing parameter for SentencePiece sampling
@@ -26,12 +26,12 @@ data:
   corpus_1:
     path_src: data/src-train.txt
     path_tgt: data/tgt-train.txt
-    transforms: [onmt_tokenize, filtertoolong]
+    transforms: [sentencepiece, filtertoolong]    
     weight: 1
   valid:
     path_src: data/src-val.txt
     path_tgt: data/tgt-val.txt
-    transforms: [onmt_tokenize]
+    transforms: [sentencepiece]
 
 # Transformer Model Hyperparameters
 save_data: data/
