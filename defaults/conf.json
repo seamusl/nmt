@@ -4,10 +4,10 @@
         {   
             "model": "model_step_20000.pt"
         },{ 
-            "model": "model_step_40000.pt.pt"   
+            "model": "model_step_40000.pt"   
         },
 	{   
-	    "model": "model_step_60000.pt.pt"   
+	    "model": "model_step_60000.pt"   
         }   
     ]   
 }
