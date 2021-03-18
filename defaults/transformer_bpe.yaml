@@ -7,14 +7,16 @@ tgt_vocab: data/vocab.tgt
 # Tokenisation options
 # no submodel used with transformer architecture, by default
 
-src_subword_type: 
-src_subword_model: 
-tgt_subword_type: 
-tgt_subword_model: 
+# Tokenisation options
+src_subword_type: sentencepiece
+src_subword_model: data/spm.model
+tgt_subword_type: sentencepiece
+tgt_subword_model: data/spm.model
 # Number of candidates for SentencePiece sampling
 subword_nbest: 20
 # Smoothing parameter for SentencePiece sampling
 subword_alpha: 0.1
+
 # Specific arguments for pyonmttok
 src_onmttok_kwargs: "{'mode': 'none', 'spacer_annotate': True}"
 tgt_onmttok_kwargs: "{'mode': 'none', 'spacer_annotate': True}"
@@ -28,12 +30,12 @@ data:
   corpus_1:
     path_src: data/src-train.txt
     path_tgt: data/tgt-train.txt
-    transforms: [onmt_tokenize, filtertoolong]
+    transforms: [sentencepiece, filtertoolong]
     weight: 1
   valid:
     path_src: data/src-val.txt
     path_tgt: data/tgt-val.txt
-    transforms: [onmt_tokenize]
+    transforms: [sentencepiece]
 
 # silently ignore empty lines in the data
 skip_empty_level: silent
