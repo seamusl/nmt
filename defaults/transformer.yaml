@@ -6,6 +6,14 @@ tgt_vocab: data/vocab.tgt
 
 # Tokenisation options
 # no submodel used with transformer architecture, by default
+src_subword_type:
+src_subword_model:
+tgt_subword_type:
+tgt_subword_model:
+# Number of candidates for SentencePiece sampling
+subword_nbest: 20
+# Smoothing parameter for SentencePiece sampling
+subword_alpha: 0.1
 
 # Specific arguments for pyonmttok
 src_onmttok_kwargs: "{'mode': 'none', 'spacer_annotate': True}"
